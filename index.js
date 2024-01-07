@@ -8,6 +8,7 @@ morgan.token('body', req => (
 	Object.keys(req.body).length ? JSON.stringify(req.body) : ' '
 ))
 
+app.use(express.static('dist'))
 app.use(cors())
 app.use(express.json())
 app.use(
