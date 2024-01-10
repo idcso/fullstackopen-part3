@@ -7,7 +7,7 @@ const Person = require('./models/person')
 const PORT = process.env.PORT || 3001
 
 const unknownEndpoint = (request, response) => {
-  response.status(404).send({ error: 'unknown endpoint' })
+	response.status(404).send({ error: 'unknown endpoint' })
 }
 
 const errorHandler = (error, request, response, next) => {
@@ -78,12 +78,12 @@ app.post('/api/persons', (request, response, next) => {
 		if(result.length) {
 			return response.status(400).send({ error: 'name must be unique' })
 		}
-		
+
 		const newPerson = new Person({
 			name: body.name,
 			number: body.number,
 		})
-	
+
 		newPerson.save().then(savedPerson => response.json(savedPerson))
 			.catch(error => next(error))
 	})
@@ -96,13 +96,13 @@ app.put('/api/persons/:id', (request, response, next) => {
 	}
 
 	Person.findByIdAndUpdate(
-		request.params.id, 
-		person, 
+		request.params.id,
+		person,
 		{ new: true, runValidators: true, context: 'query' }
 	)
 		.then(result => {
 			if (!result) return response.status(400).send({ error: 'no such person found' })
-			
+
 			response.json(result)
 		})
 		.catch(error => next(error))
@@ -110,7 +110,7 @@ app.put('/api/persons/:id', (request, response, next) => {
 
 app.delete('/api/persons/:id', (request, response) => {
 	Person.findByIdAndDelete(request.params.id)
-		.then(result => response.status(204).end())
+		.then(() => response.status(204).end())
 })
 
 app.use(unknownEndpoint)
