@@ -1,1 +1,2 @@
 https://phonebook-backend-z5lt.onrender.com
+(Render spins down a Free web service that goes 15 minutes without receiving inbound traffic. Render spins the service back up whenever it next receives a request to process, it takes ~1min for the service to go live)
